@@ -135,13 +135,27 @@ def crawl(query: str, limit: int) -> int:
 
 def main():
     parser = argparse.ArgumentParser(description="RepoRadar crawler")
-    parser.add_argument("--seed", required=True, help='e.g. "topic:python stars:>50"')
+    parser.add_argument("--seed", help='e.g. "topic:python stars:>50"')
+    parser.add_argument("--seeds-file", help="path to file with one query per line")
     parser.add_argument("--limit", type=int, default=300)
     args = parser.parse_args()
     if not TOKEN:
         print("⚠️  No GITHUB_TOKEN in env — crawling unauthenticated (60 req/hr).")
         print("    Export GITHUB_TOKEN for 5,000 req/hr.")
-    crawl(args.seed, args.limit)
+
+    queries = []
+    if args.seeds_file:
+        with open(args.seeds_file, encoding="utf-8") as f:
+            queries = [line.strip() for line in f if line.strip()]
+    elif args.seed:
+        queries = [args.seed]
+    else:
+        parser.error("provide --seed or --seeds-file")
+
+    total = 0
+    for q in queries:
+        total += crawl(q, args.limit)
+    print(f"\n🏁 Full pass done: {total} new repos saved → {OUT_FILE}")
 
 
 if __name__ == "__main__":
