@@ -56,9 +56,15 @@ def api_get(url: str, retries: int = 4) -> tuple[dict | None, dict]:
                 return None, {}
             print(f"  ⚠️ HTTP {e.code}: {url}", file=sys.stderr)
             return None, {}
-        except (urllib.error.URLError, TimeoutError, OSError) as e:
+        except (urllib.error.URLError, TimeoutError, OSError,
+                http.client.IncompleteRead, http.client.HTTPException,
+                ConnectionResetError, BrokenPipeError) as e:
             wait = 10 * (attempt + 1)
             print(f"  🌐 Network error ({e}) — retry {attempt+1}/{retries} in {wait}s", flush=True)
+            time.sleep(wait)
+        except (json.JSONDecodeError, ValueError):
+            wait = 10 * (attempt + 1)
+            print(f"  🧩 Bad response body — retry {attempt+1}/{retries} in {wait}s", flush=True)
             time.sleep(wait)
     print(f"  ❌ Giving up after {retries} tries: {url}", file=sys.stderr)
     return None, {}
