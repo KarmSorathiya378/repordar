@@ -85,11 +85,14 @@ def parse_query(query: str) -> dict:
         return _llm_parse(query)
     except Exception as e:
         # LLM down/rate-limited → degrade to local rule parser. Honest fallback.
+        print(f"⚠️ LLM understanding failed ({type(e).__name__}: {e}) — using rules", file=sys.stderr, flush=True)
         return _local_parse(query)
 
 
 def _llm_parse(query: str) -> dict:
-    client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
+    if not os.environ.get("GROQ_API_KEY"):
+        raise RuntimeError("GROQ_API_KEY not set")
+    client = Groq(api_key=os.environ["GROQ_API_KEY"])
     today = date.today()
     system = SYSTEM_PROMPT.replace("{today}", today.isoformat()).replace("{year}", str(today.year)) + "\n" + _EXAMPLE
     resp = client.chat.completions.create(

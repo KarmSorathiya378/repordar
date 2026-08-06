@@ -14,6 +14,7 @@ Uses stdlib http.server — zero extra dependencies.
 
 import argparse
 import json
+import os
 import sys
 import threading
 import time
@@ -24,6 +25,22 @@ from urllib.parse import parse_qs, urlparse
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).parent))
+
+
+def _load_env():
+    """Load repo-local .env into os.environ (without clobbering existing)."""
+    env_file = Path(__file__).parent / ".env"
+    if not env_file.exists():
+        return
+    import re
+    for line in env_file.read_text(encoding="utf-8").splitlines():
+        m = re.match(r"^\s*([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*?)\s*$", line)
+        if m and m.group(1) not in os.environ:
+            os.environ[m.group(1)] = m.group(2).strip().strip('"').strip("'")
+
+
+_load_env()
+
 from embed import NAMES_FILE, VECTORS_FILE, MODEL_NAME, search as semantic_search_raw
 from query_understand import parse_query
 from search_core import BM25Index, OUT_FILE, extract_snippet, highlight, tokenize
@@ -186,10 +203,19 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
         from urllib.parse import urlparse
         parsed = urlparse(self.path)
-        if parsed.path in ("/", "/health"):
+
+        # Serve the static web UI
+        if parsed.path in ("/", "/index.html"):
+            self._serve_static("index.html")
+            return
+        if parsed.path.startswith("/static/"):
+            self._serve_static(parsed.path[len("/static/"):])
+            return
+
+        if parsed.path in ("/api/health", "/api/health"):
             self._json({"status": "ok", "repos": _engine.idx.N})
             return
-        if parsed.path == "/search":
+        if parsed.path == "/api/search":
             qs = parse_qs(parsed.query)
             q = qs.get("q", [""])[0]
             if not q:
@@ -200,9 +226,27 @@ class Handler(BaseHTTPRequestHandler):
                 result = _engine.search(q, limit=limit)
                 self._json(result)
             except Exception as e:
-                self._json({"error": str(e)}, status=500)
+                self._json({"error": f"{type(e).__name__}: {e}"}, status=500)
             return
         self._json({"error": "not found"}, status=404)
+
+    def _serve_static(self, name):
+        import mimetypes
+        root = Path(__file__).parent / "web"
+        # guard against path traversal
+        safe = Path(name).name if ".." in name else name
+        fp = (root / safe)
+        if not fp.exists() or not fp.is_file():
+            self._json({"error": "not found"}, status=404)
+            return
+        body = fp.read_bytes()
+        ctype = mimetypes.guess_type(fp.name)[0] or "application/octet-stream"
+        self.send_response(200)
+        self.send_header("Content-Type", ctype)
+        self.send_header("Content-Length", str(len(body)))
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.end_headers()
+        self.wfile.write(body)
 
     def _json(self, data, status=200):
         body = json.dumps(data, ensure_ascii=False).encode("utf-8")
