@@ -60,8 +60,20 @@ if not exist "crawler\data\vectors.npy" (
   )
 )
 
-REM ---- 5. Launch server ----
-echo [4/4] Starting server...
+REM ---- 5. Frontend build (Vite/React -> web/dist) ----
+if not exist "web\dist\index.html" (
+  echo [4/5] Building frontend (first run, ~1 min)...
+  pushd web
+  call npm install >nul 2>nul
+  call npm run build
+  if errorlevel 1 ( echo [X] frontend build failed & popd & pause & exit /b 1 )
+  popd
+) else (
+  echo [4/5] Frontend ready
+)
+
+REM ---- 6. Launch server ----
+echo [5/5] Starting server...
 start "" http://localhost:8123
 set "PYTHONPATH="
 "%PY%" server.py --port 8123

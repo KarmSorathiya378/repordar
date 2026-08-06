@@ -224,12 +224,24 @@ class Handler(BaseHTTPRequestHandler):
         from urllib.parse import urlparse
         parsed = urlparse(self.path)
 
-        # Serve the static web UI
-        if parsed.path in ("/", "/index.html"):
-            self._serve_static("index.html")
-            return
-        if parsed.path.startswith("/static/"):
-            self._serve_static(parsed.path[len("/static/"):])
+        # Serve the static web UI (React build in web/dist)
+        root = Path(__file__).parent / "web" / "dist"
+        is_api = parsed.path.startswith("/api/")
+        if not is_api:
+            if parsed.path in ("/", "/index.html"):
+                self._serve_static("index.html", root)
+                return
+            if parsed.path.startswith("/static/"):
+                self._serve_static(parsed.path[len("/static/"):], root)
+                return
+            if parsed.path.startswith("/assets/"):
+                self._serve_static(parsed.path.lstrip("/"), root)
+                return
+            # SPA fallback: unknown non-API paths serve the app shell
+            if parsed.path == "/favicon.svg":
+                self._serve_static("favicon.svg", root)
+                return
+            self._serve_static("index.html", root)
             return
 
         if parsed.path in ("/api/health", "/api/health"):
@@ -263,9 +275,10 @@ class Handler(BaseHTTPRequestHandler):
             return
         self._json({"error": "not found"}, status=404)
 
-    def _serve_static(self, name):
+    def _serve_static(self, name, root=None):
         import mimetypes
-        root = Path(__file__).parent / "web"
+        if root is None:
+            root = Path(__file__).parent / "web" / "dist"
         # guard against path traversal
         safe = Path(name).name if ".." in name else name
         fp = (root / safe)
