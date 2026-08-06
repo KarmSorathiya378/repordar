@@ -18,6 +18,8 @@ import os
 import sys
 import threading
 import time
+import datetime
+from collections import Counter, deque
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
@@ -77,6 +79,11 @@ class RepoRadarEngine:
         self.text_by_name = {self.idx.docs[i]["full_name"]: self.idx.doc_text[i]
                              for i in range(self.idx.N)}
         self.idx.docs_by_name = {d["full_name"]: d for d in self.idx.docs}
+
+        # query log: recent queries + counts (in-memory, lightweight)
+        self.query_log: deque = deque(maxlen=200)
+        self.query_counter: Counter = Counter()
+        self.start_time = time.time()
         self.log("✅ Engine ready.")
 
     def log(self, msg):
@@ -102,6 +109,14 @@ class RepoRadarEngine:
     def search(self, query: str, limit: int = 10, min_stars: int | None = None) -> dict:
         t0 = time.time()
 
+        # log the query for stats/observability
+        self.query_counter[query.lower()] += 1
+        self.query_log.append({
+            "q": query, "ts": datetime.datetime.now().isoformat(timespec="seconds"),
+            "limit": limit, "source": "?", "elapsed": None,
+        })
+        self.query_log[-1]["source"] = "pending"
+
         # 1) UNDERSTAND (Groq LLM; falls back to rules if down)
         if not self._skip_llm:
             parsed = parse_query(query)
@@ -111,6 +126,7 @@ class RepoRadarEngine:
                       "source": "manual"}
 
         filters = parsed["filters"]
+        self.query_log[-1]["source"] = parsed["source"]
         eff_stars = min_stars if min_stars is not None else (filters.get("min_stars") or 0)
         language = filters.get("language")
         updated_after = filters.get("updated_after")
@@ -184,12 +200,15 @@ class RepoRadarEngine:
                 "url": f"https://github.com/{r['full_name']}",
             })
 
+        elapsed = round((time.time() - t0) * 1000)
+        self.query_log[-1]["elapsed"] = elapsed
+
         return {
             "query": query,
             "understood": {"semantic": semantic_q, "keywords": parsed["keywords"],
                            "filters": filters, "source": parsed["source"]},
             "results": out,
-            "elapsed_ms": round((time.time() - t0) * 1000),
+            "elapsed_ms": elapsed,
         }
 
 
@@ -214,6 +233,19 @@ class Handler(BaseHTTPRequestHandler):
 
         if parsed.path in ("/api/health", "/api/health"):
             self._json({"status": "ok", "repos": _engine.idx.N})
+            return
+        if parsed.path == "/api/stats":
+            eng = _engine
+            total = sum(eng.query_counter.values())
+            top = eng.query_counter.most_common(15)
+            self._json({
+                "repos": eng.idx.N,
+                "uptime_sec": round(time.time() - eng.start_time),
+                "total_queries": total,
+                "unique_queries": len(eng.query_counter),
+                "top_queries": [{"q": q, "count": c} for q, c in top],
+                "recent": list(eng.query_log),
+            })
             return
         if parsed.path == "/api/search":
             qs = parse_qs(parsed.query)
