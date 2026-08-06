@@ -132,8 +132,19 @@
     word-break: break-word;
   }
   .card .snippet b { color: var(--warn); }
-  .scores { display: flex; gap: 12px; margin-top: 10px; font-size: 11.5px; color: var(--dim); }
-  .scores span b { color: var(--accent2); }
+  .card .topics { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .card .topic {
+    background: rgba(34, 211, 238, 0.08); border: 1px solid rgba(34, 211, 238, 0.18);
+    color: #7ddbe9; border-radius: 999px; padding: 1px 9px; font-size: 11px;
+  }
+  .scores { display: flex; align-items: center; gap: 8px; margin-top: 12px; font-size: 11.5px; color: var(--dim); }
+  .match {
+    border: 1px solid var(--line); border-radius: 6px; padding: 2px 8px; color: #5b6b80;
+    text-transform: uppercase; font-size: 10px; letter-spacing: 0.6px;
+  }
+  .match.on { color: var(--accent2); border-color: rgba(34, 211, 238, 0.3); }
+  .fusion-sim { margin-left: auto; }
+  .fusion-sim b { color: var(--accent); font-weight: 600; }
   .go {
     display: inline-block; margin-top: 10px;
     color: var(--accent); font-size: 12.5px; font-weight: 600; text-decoration: none;
@@ -201,6 +212,14 @@ document.querySelectorAll('.examples button').forEach(b => {
   b.addEventListener('click', () => { input.value = b.dataset.q; form.requestSubmit(); });
 });
 
+// "/" focuses the search box from anywhere (like GitHub/Google)
+document.addEventListener('keydown', (e) => {
+  if (e.key === '/' && document.activeElement !== input) {
+    e.preventDefault();
+    input.focus();
+  }
+});
+
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   const q = input.value.trim();
@@ -242,6 +261,8 @@ form.addEventListener('submit', async (e) => {
         const snippet = r.snippet ? `<div class="snippet">${renderSnippet(r.snippet)}</div>` : '';
         const desc = r.description ? `<div class="desc">${escapeHtml(r.description)}</div>` : '';
         const lang = r.language ? `<span class="lang">${escapeHtml(r.language)}</span>` : '';
+        const topics = (r.topics && r.topics.length)
+          ? `<div class="topics">${r.topics.map(t => `<span class="topic">${escapeHtml(t)}</span>`).join('')}</div>` : '';
         return `
         <div class="card">
           <div class="row1">
@@ -251,11 +272,12 @@ form.addEventListener('submit', async (e) => {
             <span class="stars">⭐ ${r.stars.toLocaleString()}</span>
           </div>
           ${desc}
+          ${topics}
           ${snippet}
           <div class="scores">
-            <span>keyword <b>${kw}</b></span>
-            <span>semantic <b>${sem}</b></span>
-            <span>fusion <b>${r.rrf}</b></span>
+            <span class="match ${kw !== '—' ? 'on' : ''}">words</span>
+            <span class="match ${sem !== '—' ? 'on' : ''}">meaning</span>
+            <span class="fusion-sim">similarity <b>${r.rrf}</b></span>
           </div>
           <a class="go" href="${r.url}" target="_blank" rel="noopener">open on GitHub →</a>
         </div>`;

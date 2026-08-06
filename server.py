@@ -193,6 +193,7 @@ class RepoRadarEngine:
                 "stars": r["stars"],
                 "language": rec.get("language"),
                 "description": rec.get("description", ""),
+                "topics": rec.get("topics", [])[:6],
                 "bm25_score": r["bm25"],
                 "sem_score": r["sem"],
                 "rrf": round(r["rrf"], 4),
