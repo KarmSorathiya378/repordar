@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
 <title>RepoRadar — Find the repo you actually need</title>
 <style>
   :root {
@@ -104,6 +105,10 @@
 
   /* ── Results ────────────────────────────── */
   .results { margin-top: 20px; display: flex; flex-direction: column; gap: 12px; }
+  .resulthead {
+    color: var(--dim); font-size: 12.5px; letter-spacing: 0.3px;
+    padding: 2px 4px 0;
+  }
   .card {
     background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
     padding: 16px 18px; transition: border-color .2s, transform .15s;
@@ -227,12 +232,14 @@ form.addEventListener('submit', async (e) => {
 
     // results
     if (!d.results || !d.results.length) {
-      resultsEl.innerHTML = '<div class="empty">No repos found. Try different words — or the crawler hasn\'t reached this topic yet.</div>';
+      resultsEl.innerHTML = '<div class="empty"><div style="font-size:28px;margin-bottom:12px">📡</div>Nothing on the radar for that one.<br><span style="color:#5b6b80;font-size:12.5px">Try different words, or a broader description of what you want to build.</span></div>';
     } else {
-      resultsEl.innerHTML = d.results.map((r, i) => {
+      const rl = d.results.length;
+      resultsEl.innerHTML = `<div class="resulthead">${rl} result${rl>1?'s':''} · best match on top</div>` +
+        d.results.map((r, i) => {
         const kw = r.bm25_score != null ? r.bm25_score : '—';
         const sem = r.sem_score != null ? r.sem_score : '—';
-        const snippet = r.snippet ? `<div class="snippet">${escapeHtml(r.snippet)}</div>` : '';
+        const snippet = r.snippet ? `<div class="snippet">${renderSnippet(r.snippet)}</div>` : '';
         const desc = r.description ? `<div class="desc">${escapeHtml(r.description)}</div>` : '';
         const lang = r.language ? `<span class="lang">${escapeHtml(r.language)}</span>` : '';
         return `
@@ -265,6 +272,12 @@ form.addEventListener('submit', async (e) => {
 function escapeHtml(s) {
   return String(s ?? '').replace(/[&<>"']/g,
     c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+// Render a snippet: escape everything, then turn **term** markers into real bold.
+function renderSnippet(s) {
+  const escaped = escapeHtml(s);
+  return escaped.replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>');
 }
 </script>
 </body>
