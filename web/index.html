@@ -39,8 +39,10 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     background-image:
+      radial-gradient(circle at 1px 1px, rgba(255,255,255,0.025) 1px, transparent 1px),
       radial-gradient(ellipse 70% 45% at 50% -12%, rgba(94, 106, 210, 0.16), transparent),
       radial-gradient(ellipse 40% 30% at 85% 0%, rgba(113, 112, 255, 0.06), transparent);
+    background-size: 64px 64px, auto, auto;
     background-attachment: fixed;
   }
 
@@ -161,6 +163,17 @@
   }
   .examples button:hover { border-color: var(--accent); background: var(--accent-soft); transform: translateY(-1px); }
 
+  /* ── How it works ───────────────────────── */
+  .how { max-width: 900px; margin: 56px auto 0; padding-top: 34px; border-top: 1px solid var(--border-subtle); }
+  .how-grid { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 20px; align-items: start; }
+  .how-item { padding: 6px 4px; }
+  .how-num { font-family: var(--mono); font-size: 11px; color: var(--accent-bright); letter-spacing: 0.05em; margin-bottom: 10px; }
+  .how-title { font-size: 15px; font-weight: 600; color: var(--text); letter-spacing: -0.3px; margin-bottom: 6px; }
+  .how-desc { font-size: 13px; line-height: 1.6; color: var(--text3); letter-spacing: -0.1px; }
+  .how-desc b { color: var(--text2); font-weight: 600; }
+  .how-desc i { color: var(--text2); font-style: normal; }
+  .how-arrow { color: var(--text4); font-size: 18px; padding-top: 26px; }
+
   /* ── Understood ──────────────────────────── */
   .understood-bar { margin: 40px 0 6px; display: none; }
   .understood-bar.show { display: flex; align-items: flex-start; gap: 12px; }
@@ -257,6 +270,9 @@
     .console-body { padding-left: 14px; }
     .console input { font-size: 15px; }
     .card .name { white-space: normal; }
+    .how-grid { grid-template-columns: 1fr; gap: 18px; }
+    .how-arrow { display: none; }
+    .resulthead .ms { display: none; }
   }
 </style>
 </head>
@@ -270,7 +286,7 @@
     </div>
     <div class="nav-links">
       <a href="#" onclick="event.preventDefault();document.getElementById('q').focus()">Search</a>
-      <a href="#" id="howLink">How it works</a>
+      <a href="#how">How it works</a>
     </div>
     <div class="nav-right">
       <span class="kbd">/</span>
@@ -280,7 +296,7 @@
 </div>
 
 <div class="wrap">
-  <div class="hero" id="how">
+  <div class="hero">
     <div class="eyebrow"><span class="dot-live"></span> Live · searching <span id="navCount">…</span> GitHub repos</div>
     <h1>Find the repo that <em>actually</em><br>solves your <span class="h1-accent">problem</span></h1>
     <p>Describe what you're building in plain English. RepoRadar reads the <b>contents of every README</b> — not just names — so the hidden, low-star project you need surfaces with the famous ones.</p>
@@ -303,6 +319,28 @@
       <button data-q="terminal multiplexer alternative to tmux">🖥️ terminal multiplexer</button>
       <button data-q="lightweight embedded key value database in go">🗄️ kv database go</button>
       <button data-q="remove background from photos programmatically">🖼️ remove bg</button>
+    </div>
+  </div>
+
+  <div class="how" id="how">
+    <div class="how-grid">
+      <div class="how-item">
+        <div class="how-num">01</div>
+        <div class="how-title">Describe the problem</div>
+        <div class="how-desc">Type what you're building in plain English. No keywords needed — say it like you'd ask a colleague.</div>
+      </div>
+      <div class="how-arrow">→</div>
+      <div class="how-item">
+        <div class="how-num">02</div>
+        <div class="how-title">We read the READMEs</div>
+        <div class="how-desc">An LLM extracts what you mean, then we search the <b>actual contents</b> of 6,000+ READMEs — keywords and meaning.</div>
+      </div>
+      <div class="how-arrow">→</div>
+      <div class="how-item">
+        <div class="how-num">03</div>
+        <div class="how-title">Ranked with proof</div>
+        <div class="how-desc">Fused keyword + semantic scores, with the matched snippet shown so you can see <i>why</i> each repo ranked.</div>
+      </div>
     </div>
   </div>
 
