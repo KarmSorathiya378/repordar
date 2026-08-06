@@ -87,6 +87,11 @@
     font-size: 12px; font-family: inherit; transition: border-color .2s;
   }
   .examples button:hover { border-color: var(--accent2); }
+  .kbd-hint { margin-left: 10px; color: #4a5a70; font-size: 11.5px; }
+  .kbd-hint b {
+    border: 1px solid var(--line); border-radius: 5px; padding: 0 6px;
+    background: var(--panel); color: var(--accent2); font-weight: 600;
+  }
 
   /* ── Status / understood ────────────────── */
   .status { margin: 18px 2px 0; font-size: 13px; color: var(--dim); }
@@ -188,12 +193,13 @@
   </form>
 
   <div class="examples">
-    <button data-q="a game where silly banana characters come to life">🍌 banana game</button>
-    <button data-q="api key manager for ai agents">🔑 api key manager</button>
-    <button data-q="terminal multiplexer to split my terminal into panes">🖥️ terminal multiplexer</button>
-    <button data-q="lightweight embedded key value database in go">🗄️ kv database go</button>
-    <button data-q="remove background from photos programmatically">🖼️ remove bg</button>
-  </div>
+      Try: <button data-q="video game where i raise and level up cute animal characters">🍌 banana game</button>
+      <button data-q="secure api key management">🔑 api key manager</button>
+      <button data-q="terminal multiplexer alternative to tmux">🖥️ terminal multiplexer</button>
+      <button data-q="lightweight embedded key value database in go">🗄️ kv database go</button>
+      <button data-q="remove background from photos programmatically">🖼️ remove bg</button>
+      <span class="kbd-hint">press <b>/</b></span>
+    </div>
 
   <div id="status"></div>
   <div id="understood"></div>
@@ -286,8 +292,8 @@ form.addEventListener('submit', async (e) => {
           ${topics}
           ${snippet}
           <div class="scores">
-            <span class="match ${kw !== '—' ? 'on' : ''}">words</span>
-            <span class="match ${sem !== '—' ? 'on' : ''}">meaning</span>
+            <span class="match ${kw !== '—' ? 'on' : ''}" title="Keyword match — your exact words appear in the README">words</span>
+            <span class="match ${sem !== '—' ? 'on' : ''}" title="Meaning match — semantically similar even if the wording differs">meaning</span>
             <span class="fusion-sim">similarity <b>${r.rrf}</b></span>
           </div>
           <a class="go" href="${r.url}" target="_blank" rel="noopener">open on GitHub →</a>
