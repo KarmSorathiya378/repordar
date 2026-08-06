@@ -13,6 +13,7 @@ Output: crawler/data/repos.jsonl (append-only, resumable)
 
 import argparse
 import base64
+import http.client
 import json
 import os
 import sys
