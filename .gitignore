@@ -25,3 +25,5 @@ Thumbs.db
 *.log
 crawler/data/
 crawler/*.jsonl
+crawler/data/vectors.npy
+crawler/data/vector_names.jsonl
