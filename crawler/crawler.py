@@ -36,6 +36,10 @@ DATA_DIR = Path(__file__).parent / "data"
 DATA_DIR.mkdir(exist_ok=True)
 OUT_FILE = DATA_DIR / "repos.jsonl"
 
+# Reject repos too fresh to be real projects (created in last N days).
+# Fresh = empty shells, day-one abandonments, spam. Applies unconditionally.
+MIN_CREATED_DAYS = 30
+
 
 def api_get(url: str, retries: int = 4) -> tuple[dict | None, dict]:
     """GET a GitHub API URL, honoring rate limits. Returns (json, headers).
@@ -80,7 +84,7 @@ def get_readme(full_name: str) -> str:
         text = base64.b64decode(data["content"]).decode("utf-8", errors="replace")
     except Exception:
         return ""
-    return text[:4000]  # truncate: search needs the head, not the whole book
+    return text[:12000]  # truncate generously: search needs depth, not the whole book
 
 
 def search_repos(query: str, limit: int, per_page: int = 30) -> list[dict]:
@@ -96,7 +100,7 @@ def search_repos(query: str, limit: int, per_page: int = 30) -> list[dict]:
             break
         results.extend(data["items"])
         print(f"  📦 page {page}: {len(results)} repos so far", flush=True)
-        time.sleep(6)  # search API hard cap: 10/min
+        time.sleep(2.5)  # search API cap: 30/min authenticated; 2.5s = 24/min (margin)
         if len(results) >= limit:
             break
     return results[:limit]
@@ -115,13 +119,12 @@ def seen_ids() -> set[str]:
     return ids
 
 
-def passes_gate(repo: dict, readme: str) -> tuple[bool, str]:
-    """Quality gate for long-tail repos: is this a real, working project?
-    Returns (pass, reason-if-failed)."""
+def gate_meta(repo: dict) -> tuple[bool, str]:
+    """Metadata quality checks — costs ZERO API calls (all in search results).
+
+    Run BEFORE fetching READMEs so rejected repos never burn a request."""
     if repo.get("archived"):
         return False, "archived"
-    if len(readme.strip()) < 200:
-        return False, "README too short"
     lic = (repo.get("license") or {}).get("spdx_id", "")
     if not lic or lic == "NOASSERTION":
         return False, "no real license"
@@ -141,6 +144,16 @@ def passes_gate(repo: dict, readme: str) -> tuple[bool, str]:
     return True, ""
 
 
+def passes_gate(repo: dict, readme: str) -> tuple[bool, str]:
+    """Full quality gate — metadata first (free), README depth last."""
+    ok, reason = gate_meta(repo)
+    if not ok:
+        return False, reason
+    if len(readme.strip()) < 200:
+        return False, "README too short"
+    return True, ""
+
+
 def crawl(query: str, limit: int, gate: bool = False) -> int:
     print(f"🔍 Searching: {query}")
     repos = search_repos(query, limit)
@@ -152,15 +165,37 @@ def crawl(query: str, limit: int, gate: bool = False) -> int:
             full_name = repo["full_name"]
             if repo["id"] in seen:
                 continue
-            readme = get_readme(full_name)
+            # Too-fresh guard: reject repos created within MIN_CREATED_DAYS,
+            # unconditionally — they're shells/spam, not long-tail treasure.
+            # Zero API cost: created_at ships in the search payload.
+            created = repo.get("created_at", "")
+            try:
+                from datetime import datetime, timezone
+                created_dt = datetime.fromisoformat(created.replace("Z", "+00:00"))
+                if (datetime.now(timezone.utc) - created_dt).days < MIN_CREATED_DAYS:
+                    skipped += 1
+                    print(f"  ⏭️  {full_name} — too fresh ({created[:10]})", flush=True)
+                    seen.add(repo["id"])
+                    continue  # no API call made → no sleep needed
+            except (ValueError, TypeError):
+                pass  # missing/bad created_at → let the gate decide
+            # --- Metadata gate FIRST (ZERO API calls): reject junk before
+            # spending a request on its README.
             if gate:
-                ok, reason = passes_gate(repo, readme)
+                ok, reason = gate_meta(repo)
                 if not ok:
                     skipped += 1
                     print(f"  ⏭️  {full_name} — rejected: {reason}", flush=True)
                     seen.add(repo["id"])  # don't re-check next pass
-                    time.sleep(1)
-                    continue
+                    continue  # no API call made → no sleep needed
+            # --- Only survivors cost an API call: fetch the README.
+            readme = get_readme(full_name)
+            if gate and len(readme.strip()) < 200:
+                skipped += 1
+                print(f"  ⏭️  {full_name} — README too short", flush=True)
+                seen.add(repo["id"])
+                time.sleep(1)  # README fetch DID hit the API → stay gentle
+                continue
             row = {
                 "id": repo["id"],
                 "full_name": full_name,

@@ -45,6 +45,25 @@ export interface StatsResponse {
   recent: { q: string; source: string; elapsed: number }[]
 }
 
+export interface PopularRepo {
+  full_name: string
+  stars: number
+  description: string
+  language: string | null
+}
+
+export interface PopularLanguage {
+  language: string
+  count: number
+  pct: number
+}
+
+export interface PopularResponse {
+  total: number
+  popular: PopularRepo[]
+  languages: PopularLanguage[]
+}
+
 const BASE = '' // same origin in prod; vite dev proxies /api
 
 async function get<T>(path: string): Promise<T> {
@@ -63,4 +82,8 @@ export function apiHealth(): Promise<HealthResponse> {
 
 export function apiStats(): Promise<StatsResponse> {
   return get('/api/stats')
+}
+
+export function apiPopular(): Promise<PopularResponse> {
+  return get('/api/popular')
 }

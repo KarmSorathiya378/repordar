@@ -1,7 +1,3 @@
-# Long-tail sweep seeds — niche topics, NO star floor.
-# Sweeps collect ALL repos in these small pools, then the quality gate
-# (--gate) keeps only real, working projects. This is how we find
-# "secret" repos like seehiong/banana-levelup (52★, genuinely useful).
 topic:avatar-generator
 topic:360-viewer
 topic:character-generation

@@ -260,6 +260,27 @@ class Handler(BaseHTTPRequestHandler):
                 "recent": list(eng.query_log),
             })
             return
+
+        if parsed.path == "/api/popular":
+            # cheap, LLM-free showcase data — top repos by stars + language profile
+            eng = _engine
+            docs = sorted(eng.idx.docs, key=lambda d: d.get("stars", 0), reverse=True)
+            featured = [
+                {"full_name": d["full_name"], "stars": d.get("stars", 0),
+                 "description": (d.get("description") or "")[:200],
+                 "language": d.get("language")}
+                for d in docs[:12]
+            ]
+            langs: Counter = Counter()
+            for d in eng.idx.docs:
+                l = d.get("language")
+                if l:
+                    langs[l] += 1
+            lang_total = sum(langs.values())
+            lang_top = [{"language": l, "count": c, "pct": round(100 * c / lang_total, 1)}
+                        for l, c in langs.most_common(6)]
+            self._json({"total": eng.idx.N, "popular": featured, "languages": lang_top})
+            return
         if parsed.path == "/api/search":
             qs = parse_qs(parsed.query)
             q = qs.get("q", [""])[0]
