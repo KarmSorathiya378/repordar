@@ -24,6 +24,14 @@ import urllib.request
 from pathlib import Path
 
 TOKEN = os.environ.get("GITHUB_TOKEN", "")
+if not TOKEN:
+    env_file = Path(__file__).resolve().parent.parent / ".env"
+    if env_file.exists():
+        for line in env_file.open(encoding="utf-8", errors="ignore"):
+            if line.startswith("GITHUB_TOKEN="):
+                TOKEN = line.split("=", 1)[1].strip().strip('"').strip("'")
+                break
+
 HEADERS = {
     "User-Agent": "repordar-crawler/0.1",
     "Accept": "application/vnd.github+json",
@@ -125,9 +133,13 @@ def gate_meta(repo: dict) -> tuple[bool, str]:
     Run BEFORE fetching READMEs so rejected repos never burn a request."""
     if repo.get("archived"):
         return False, "archived"
+    stars = repo.get("stargazers_count", 0)
+    forks = repo.get("forks_count", 0)
     lic = (repo.get("license") or {}).get("spdx_id", "")
+    # Allow missing/custom license IF repo is popular/widely used (stars >= 50 or forks >= 10)
     if not lic or lic == "NOASSERTION":
-        return False, "no real license"
+        if stars < 50 and forks < 10:
+            return False, "no real license"
     if not (repo.get("description") or "").strip():
         return False, "no description"
     pushed = repo.get("pushed_at", "")

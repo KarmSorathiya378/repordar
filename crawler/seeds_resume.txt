@@ -1,95 +1,15 @@
-productivity terminal tool
-youtube downloader cli
-music library organizer
-playlist manager tool
-podcast downloader app
-whatsapp automation bot
-telegram bot framework
-discord bot handler
-instagram media downloader
-twitter data scraper
-reddit bot framework
-proxy list scraper
-email address validator
-phone number validator
-password generator cli
-password manager terminal
-two factor authenticator app
-otp generator tool
-ssh key manager
-git aliases collection
-git workflow automation
-github actions examples
-ci cd pipeline templates
-kubernetes operator example
-terraform module library
-ansible playbook collection
-docker compose examples
-devcontainer templates
-vscode extension starter
-neovim plugin example
-vim plugin starter
-tmux configuration files
-zsh plugins collection
-terminal multiplexer setup
-markdown editor web
-markdown preview tool
-latex resume template
-resume builder github pages
-portfolio website generator
-static site generator minimal
-personal blog engine
-self hosted wiki
-notes app local
-obsidian community plugin
-logseq plugin example
-knowledge base manager
-second brain app
-flashcard app spaced repetition
-language learning flashcards
-quiz generator tool
-math problem solver app
-calculator web app
-unit converter cli
-currency converter app
-timezone converter tool
-weather app cli
-stock price ticker
-crypto portfolio tracker
-personal budget app
-upi payment integration
-payment gateway sdk
-ecommerce price scraper
-price tracking bot
-deal finder tool
-grocery shopping list app
-inventory management system
-point of sale system
-restaurant menu app
-food delivery app clone
-recipe finder app
-calorie counting app
-workout plan generator
-meditation timer app
-sleep tracker app
-health dashboard app
-focus writing app
-markdown blogging platform
-emoji picker extension
-clipboard history manager
-screenshot annotation tool
-screen recording app
-text expander tool
-typing speed test
-keyboard layout tool
-system monitor dashboard
-cpu temperature monitor
-network speed tester
-wifi password viewer
-port scanner tool
-subdomain enumerator
-reverse ip lookup
-link shortener self hosted
-url metadata extractor
-bookmark manager self hosted
-rss reader self hosted
+n8n
+open-webui
+dify
+ragflow
+langflow
+autogpt
+crewai
+jina
+milvus
+weaviate
+whisper
+llama-cpp
+supabase
+hasura
+temporalio

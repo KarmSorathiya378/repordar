@@ -1,0 +1,164 @@
+cli log viewer terminal
+sqlite viewer cli
+git visualizer terminal
+http client cli alternative curl
+json processor cli jq alternative
+regex tester terminal
+shell script linter
+environment variable validator
+docker container status terminal
+db schema migration tool
+pdf table extractor
+ocr text extraction tool
+markdown to pdf converter
+csv analyzer terminal
+excel report generator python
+yaml json converter cli
+epub reader terminal
+pandoc wrapper cli
+html to markdown converter
+llm prompt manager local
+local rag document assistant
+vector database light local
+voice to text transcript tool
+ai code reviewer cli
+image background remover tool
+audio noise suppression tool
+web scraper headless minimal
+local dns server minimal
+bandwidth monitor terminal
+file sync tool local network
+encrypted vault file system
+process monitor TUI
+disk usage analyzer tui
+ssh config manager cli
+tcell tui dashboard
+port forwarder tunneling tool
+time tracker terminal
+kanban board terminal
+code snippet manager cli
+git commit message generator
+api mock server minimal
+changelog generator git
+documentation site generator lightweight
+screenshot capture annotations cli
+bookmark manager terminal
+secret scanner git pre commit
+dotfiles manager cli
+certificate inspector cli
+jwt decoder cli
+vault secrets manager lightweight
+obfuscator code tool
+tls certificate auto renew minimal
+fullstack boilerplate authentication database
+react nextjs starter template auth tailwind prisma
+fastapi starter template jwt postgresql
+express typescript boilerplate auth database
+flutter starter kit auth firebase sqlite
+go web starter template auth gorm
+rust actix web boilerplate auth diesel
+django starter template tailwind celery postgres
+microservice boilerplate auth database docker
+saas starter kit open source auth stripe
+nextjs auth tailwind template
+remix run starter auth database
+sveltekit boilerplate auth tailwind
+nuxt vue starter kit auth
+astro starter template blog database
+fastapi microservice boilerplate jwt
+django rest framework starter postgres
+laravel boilerplate api auth sanctum
+spring boot starter template jwt postgres
+nest js boilerplate auth prisma
+orm database migration tool
+db schema visualizer cli
+timeseries database lightweight local
+embedded key value store python
+redis client tui terminal
+graphql api generator database
+database backup automation cli
+sql query formatter linter
+cdc data sync tool minimal
+duckdb helper tools python
+react native starter auth navigation
+flutter template auth sqlite state management
+tauri desktop starter react typescript
+electron app template vite React
+expo starter template supabase auth
+docker compose microservices template
+kubernetes helm chart starter
+terraform aws module starter
+ansible collection server setup
+ci cd github actions workflow templates
+prometheus grafana dashboard template
+nginx reverse proxy setup automation
+vector log shipper config minimal
+e2e testing template playwright
+api testing tool cli postman alternative
+load testing tool cli locut alternative
+mock api generator json schema
+code coverage reporting tool minimal
+mcp server implementation python
+model context protocol server starter
+ai agent tool execution engine
+local rag vector search engine
+rust web assembly template
+go microservices gRPC boilerplate
+elixir phoenix starter auth liveview
+solidjs starter template tailwind
+astro doc site template
+hono framework edge api starter
+k8s custom resource definition controller
+terraform provider plugin starter
+ebpf network observability tool
+opentelemetry collector config example
+zero trust proxy tunnel cli
+s3 compatible storage minimal
+gitops controller minimal
+vault secrets sync operator
+container runtime minimal c
+cloud cost optimization cli
+kmp kotlin multiplatform starter
+flutter clean architecture template
+react native expo supabase auth starter
+swiftui ios starter app architecture
+android jetpack compose boilerplate
+tauri v2 desktop starter template
+go gin gorm clean architecture
+rust axum web starter postgres
+nestjs microservices rabbitmq boilerplate
+fastapi celery redis docker template
+spring boot 3 clean architecture
+laravel 11 vue 3 inertia boilerplate
+django ninja async starter
+aspnet core clean architecture template
+elysiajs bun starter template
+hono cloudflare workers template
+git tui client terminal
+database schema diff tool cli
+api documentation generator openapi
+tail log viewer tui
+network packet sniffer cli
+docker log visualizer tui
+env file validator linter cli
+cron job visualizer dashboard
+binary analysis disassembler minimal
+terminal file manager tui
+langchain python agent starter
+llama index rag pipeline template
+ollama local chat UI web
+whisper audio transcription web app
+vllm serving template docker
+image segmentation tool local
+text to speech local engine
+semantic search engine python
+keycloak custom provider template
+oauth2 OIDC provider lightweight
+wireguard mesh VPN manager
+kubernetes operator kubebuilder template
+prometheus custom exporter python
+grafana dashboard as code template
+opentelemetry tracing example
+vault secret rotation auto script
+cloud security compliance scanner
+zero trust tunnel client rust
