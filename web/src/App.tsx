@@ -1124,8 +1124,8 @@ export default function App() {
             onClick={() => setActiveTab('search')}
             className="flex cursor-pointer items-center gap-3 font-semibold transition-transform active:scale-95 group"
           >
-            <div className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-[#4638D9] text-primary-foreground shadow-md shadow-primary/25">
-              <Radar className="h-5 w-5 animate-pulse-dot text-white" />
+            <div className="relative flex h-10 w-10 shrink-0 items-center justify-center transition-transform duration-200 group-hover:scale-105">
+              <img src="/logo.png" alt="RepoRadar Logo" className="h-10 w-10 object-contain drop-shadow-[0_4px_10px_rgba(0,0,0,0.12)]" />
             </div>
             <div className="flex flex-col">
               <div className="flex items-center gap-1.5 leading-none">
@@ -1471,7 +1471,10 @@ export default function App() {
         <footer className="animate-fade-up text-xs text-muted-foreground">
           <div className="flex flex-col items-center justify-between gap-4 border-t border-border pt-6 sm:flex-row">
             <div className="flex items-center gap-4">
-              <span>© 2026 RepoRadar</span>
+              <div className="flex items-center gap-2">
+                <img src="/logo.png" alt="" className="h-5 w-5 object-contain" />
+                <span>© 2026 RepoRadar</span>
+              </div>
               <span className="text-border">|</span>
               <span className="rounded bg-muted px-2 py-1 font-mono text-[10px]">BM25 + ONNX Vectors</span>
               <span className="text-border">|</span>
