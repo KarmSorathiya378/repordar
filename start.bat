@@ -74,7 +74,9 @@ if not exist "web\dist\index.html" (
 
 REM ---- 6. Launch server ----
 echo [5/5] Starting server...
-start "" http://localhost:8123
+echo [!] Indexing ~110k repositories into memory (~1-2 min)...
+echo [!] Browser will open automatically once the engine is ready.
 set "PYTHONPATH="
 "%PY%" server.py --port 8123
 pause
+

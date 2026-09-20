@@ -1,0 +1,11 @@
+{
+  "name": "repordar",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "npm --prefix web run dev",
+    "build": "npm --prefix web run build",
+    "lint": "npm --prefix web run lint",
+    "preview": "npm --prefix web run preview"
+  }
+}

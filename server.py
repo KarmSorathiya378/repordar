@@ -389,6 +389,12 @@ def main():
     server = ThreadingHTTPServer((args.host, args.port), Handler)
     print(f"🚀 RepoRadar server on http://{args.host}:{args.port}/search?q=...", file=sys.stderr)
     try:
+        import webbrowser
+        webbrowser.open(f"http://{args.host}:{args.port}")
+    except Exception:
+        pass
+    try:
+
         server.serve_forever()
     except KeyboardInterrupt:
         print("\nShutting down.", file=sys.stderr)
