@@ -352,7 +352,7 @@ export function RepositoryVaultScene({ count }: { count: number | null }) {
           {/* ═══════════════════════════════════════════════════════════════════
               LAYER 4: THE CENTRAL 3D RED RETRO-FUTURISTIC VAULT CHEST
           ═══════════════════════════════════════════════════════════════════ */}
-          <g id="central-vault-chest" className="transition-transform duration-300 hover:scale-[1.012]">
+          <g id="central-vault-chest">
 
             {/* ── 1. Molded Stepped Base Plinth ── */}
             <polygon

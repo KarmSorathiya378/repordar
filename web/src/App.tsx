@@ -1168,35 +1168,36 @@ export default function App() {
             <section className="relative pt-10 pb-4 text-center sm:pt-14 overflow-visible">
               <HeroField />
 
-              {/* ── 7 Pixel Stickers positioned in outer margins (no text overlap, stationary) ── */}
-              <div className="pointer-events-none absolute inset-y-0 -left-12 -right-12 sm:-left-20 sm:-right-20 lg:-left-28 lg:-right-28 overflow-visible hidden md:block" aria-hidden>
-                {/* Star — top-left flank */}
-                <div className="absolute left-2 top-[3%]">
-                  <img src="/files/star.svg" alt="" className="h-14 w-14 drop-shadow-[0_8px_16px_rgba(234,179,8,0.25)] transition-transform duration-300 hover:scale-110" style={{ imageRendering: 'pixelated' }} />
+              {/* ── 7 Pixel Stickers scattered organically around hero like reference image ── */}
+              <div className="pointer-events-none absolute inset-0 overflow-visible hidden md:block" aria-hidden>
+                {/* 1. Meter / Battery — high-left, medium inward */}
+                <div className="absolute left-[7%] lg:left-[9%] top-[7%] -rotate-6">
+                  <img src="/files/meter.svg" alt="" className="h-14 w-14 drop-shadow-[0_8px_16px_rgba(100,116,139,0.20)]" style={{ imageRendering: 'pixelated' }} />
                 </div>
-                {/* Folder — mid-left flank beside 3D table, safely below paragraph text */}
-                <div className="absolute left-0 top-[48%]">
-                  <img src="/files/folder.svg" alt="" className="h-14 w-14 drop-shadow-[0_8px_16px_rgba(16,185,129,0.22)] transition-transform duration-300 hover:scale-110" style={{ imageRendering: 'pixelated' }} />
+                {/* 2. Folder — mid-left, shifted far outward into margin */}
+                <div className="absolute left-[-2.5%] sm:left-[-1%] lg:left-[0%] top-[27%] rotate-6">
+                  <img src="/files/folder.svg" alt="" className="h-14 w-14 drop-shadow-[0_8px_16px_rgba(16,185,129,0.20)]" style={{ imageRendering: 'pixelated' }} />
                 </div>
-                {/* Bookmark — lower-left flank beside table base */}
-                <div className="absolute left-4 top-[74%]">
-                  <img src="/files/bookmark.svg" alt="" className="h-12 w-12 drop-shadow-[0_8px_16px_rgba(244,63,94,0.22)] transition-transform duration-300 hover:scale-110" style={{ imageRendering: 'pixelated' }} />
+                {/* 3. Star — lower-left, tucked inward below title (like the yellow star in reference!) */}
+                <div className="absolute left-[10%] lg:left-[12%] top-[45%] -rotate-12">
+                  <img src="/files/star.svg" alt="" className="h-14 w-14 drop-shadow-[0_8px_16px_rgba(234,179,8,0.25)]" style={{ imageRendering: 'pixelated' }} />
                 </div>
-                {/* Meter — top-right flank */}
-                <div className="absolute right-2 top-[3%]">
-                  <img src="/files/meter.svg" alt="" className="h-14 w-14 drop-shadow-[0_8px_16px_rgba(100,116,139,0.20)] transition-transform duration-300 hover:scale-110" style={{ imageRendering: 'pixelated' }} />
+
+                {/* 4. CMDK / Badge — high-right, medium inward */}
+                <div className="absolute right-[12%] lg:right-[15%] top-[7%] rotate-6">
+                  <img src="/files/cmdk.svg" alt="" className="h-14 w-14 drop-shadow-[0_8px_16px_rgba(59,130,246,0.20)]" style={{ imageRendering: 'pixelated' }} />
                 </div>
-                {/* CMDK — mid-right flank beside 3D table, safely below paragraph text */}
-                <div className="absolute right-0 top-[46%]">
-                  <img src="/files/cmdk.svg" alt="" className="h-14 w-14 drop-shadow-[0_8px_16px_rgba(59,130,246,0.22)] transition-transform duration-300 hover:scale-110" style={{ imageRendering: 'pixelated' }} />
+                {/* 5. Bookmark — mid-right, shifted far outward */}
+                <div className="absolute right-[-2%] sm:right-[0%] lg:right-[1.5%] top-[23%] -rotate-3">
+                  <img src="/files/bookmark.svg" alt="" className="h-12 w-12 drop-shadow-[0_8px_16px_rgba(244,63,94,0.20)]" style={{ imageRendering: 'pixelated' }} />
                 </div>
-                {/* Bolt — mid-lower right flank */}
-                <div className="absolute right-4 top-[66%]">
-                  <img src="/files/bolt.svg" alt="" className="h-12 w-12 drop-shadow-[0_8px_16px_rgba(59,130,246,0.25)] transition-transform duration-300 hover:scale-110" style={{ imageRendering: 'pixelated' }} />
+                {/* 6. Bolt — mid-right, angled inward (like the tilted lightning bolt in reference!) */}
+                <div className="absolute right-[11%] lg:right-[13%] top-[31%] -rotate-[15deg]">
+                  <img src="/files/bolt.svg" alt="" className="h-13 w-13 drop-shadow-[0_8px_16px_rgba(59,130,246,0.25)]" style={{ imageRendering: 'pixelated' }} />
                 </div>
-                {/* Heart — lower-right flank beside table base */}
-                <div className="absolute right-1 top-[82%]">
-                  <img src="/files/heart.svg" alt="" className="h-12 w-12 drop-shadow-[0_8px_16px_rgba(244,63,94,0.25)] transition-transform duration-300 hover:scale-110" style={{ imageRendering: 'pixelated' }} />
+                {/* 7. Heart — lower-right (like the heart in reference!) */}
+                <div className="absolute right-[6%] lg:right-[8%] top-[47%] rotate-6">
+                  <img src="/files/heart.svg" alt="" className="h-13 w-13 drop-shadow-[0_8px_16px_rgba(244,63,94,0.25)]" style={{ imageRendering: 'pixelated' }} />
                 </div>
               </div>
 
