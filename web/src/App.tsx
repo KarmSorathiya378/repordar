@@ -1168,35 +1168,35 @@ export default function App() {
             <section className="relative pt-10 pb-4 text-center sm:pt-14 overflow-visible">
               <HeroField />
 
-              {/* ── 7 Pixel Stickers elevated safely away from search bar ── */}
-              <div className="pointer-events-none absolute inset-0 overflow-visible hidden md:block" aria-hidden>
+              {/* ── 7 Pixel Stickers positioned in outer margins (no text overlap, stationary) ── */}
+              <div className="pointer-events-none absolute inset-y-0 -left-12 -right-12 sm:-left-20 sm:-right-20 lg:-left-28 lg:-right-28 overflow-visible hidden md:block" aria-hidden>
                 {/* Star — top-left flank */}
-                <div className="absolute left-[1%] top-[4%] animate-float-pixel" style={{ animationDelay: '0s' }}>
-                  <img src="/files/star.svg" alt="" className="h-16 w-16 drop-shadow-[0_10px_20px_rgba(234,179,8,0.3)] transition-transform duration-300 hover:scale-110" style={{ imageRendering: 'pixelated' }} />
+                <div className="absolute left-2 top-[3%]">
+                  <img src="/files/star.svg" alt="" className="h-14 w-14 drop-shadow-[0_8px_16px_rgba(234,179,8,0.25)] transition-transform duration-300 hover:scale-110" style={{ imageRendering: 'pixelated' }} />
                 </div>
-                {/* Folder — upper-left flank */}
-                <div className="absolute left-[6%] top-[20%] animate-float-pixel" style={{ animationDelay: '1.2s' }}>
-                  <img src="/files/folder.svg" alt="" className="h-14 w-14 drop-shadow-[0_10px_20px_rgba(16,185,129,0.25)] transition-transform duration-300 hover:scale-110" style={{ imageRendering: 'pixelated' }} />
+                {/* Folder — mid-left flank beside 3D table, safely below paragraph text */}
+                <div className="absolute left-0 top-[48%]">
+                  <img src="/files/folder.svg" alt="" className="h-14 w-14 drop-shadow-[0_8px_16px_rgba(16,185,129,0.22)] transition-transform duration-300 hover:scale-110" style={{ imageRendering: 'pixelated' }} />
                 </div>
-                {/* Bookmark — mid-left flank (elevated well above search bar) */}
-                <div className="absolute left-[0%] top-[44%] animate-float-pixel" style={{ animationDelay: '0.7s' }}>
-                  <img src="/files/bookmark.svg" alt="" className="h-14 w-14 drop-shadow-[0_10px_20px_rgba(244,63,94,0.25)] transition-transform duration-300 hover:scale-110" style={{ imageRendering: 'pixelated' }} />
+                {/* Bookmark — lower-left flank beside table base */}
+                <div className="absolute left-4 top-[74%]">
+                  <img src="/files/bookmark.svg" alt="" className="h-12 w-12 drop-shadow-[0_8px_16px_rgba(244,63,94,0.22)] transition-transform duration-300 hover:scale-110" style={{ imageRendering: 'pixelated' }} />
                 </div>
                 {/* Meter — top-right flank */}
-                <div className="absolute right-[2%] top-[5%] animate-float-pixel" style={{ animationDelay: '1.8s' }}>
-                  <img src="/files/meter.svg" alt="" className="h-16 w-16 drop-shadow-[0_10px_20px_rgba(100,116,139,0.22)] transition-transform duration-300 hover:scale-110" style={{ imageRendering: 'pixelated' }} />
+                <div className="absolute right-2 top-[3%]">
+                  <img src="/files/meter.svg" alt="" className="h-14 w-14 drop-shadow-[0_8px_16px_rgba(100,116,139,0.20)] transition-transform duration-300 hover:scale-110" style={{ imageRendering: 'pixelated' }} />
                 </div>
-                {/* CMDK — upper-right flank */}
-                <div className="absolute right-[6%] top-[21%] animate-float-pixel" style={{ animationDelay: '0.5s' }}>
-                  <img src="/files/cmdk.svg" alt="" className="h-14 w-14 drop-shadow-[0_10px_20px_rgba(59,130,246,0.25)] transition-transform duration-300 hover:scale-110" style={{ imageRendering: 'pixelated' }} />
+                {/* CMDK — mid-right flank beside 3D table, safely below paragraph text */}
+                <div className="absolute right-0 top-[46%]">
+                  <img src="/files/cmdk.svg" alt="" className="h-14 w-14 drop-shadow-[0_8px_16px_rgba(59,130,246,0.22)] transition-transform duration-300 hover:scale-110" style={{ imageRendering: 'pixelated' }} />
                 </div>
-                {/* Bolt — mid-right flank */}
-                <div className="absolute right-[0%] top-[42%] animate-float-pixel" style={{ animationDelay: '2.2s' }}>
-                  <img src="/files/bolt.svg" alt="" className="h-14 w-14 drop-shadow-[0_10px_20px_rgba(59,130,246,0.28)] transition-transform duration-300 hover:scale-110" style={{ imageRendering: 'pixelated' }} />
+                {/* Bolt — mid-lower right flank */}
+                <div className="absolute right-4 top-[66%]">
+                  <img src="/files/bolt.svg" alt="" className="h-12 w-12 drop-shadow-[0_8px_16px_rgba(59,130,246,0.25)] transition-transform duration-300 hover:scale-110" style={{ imageRendering: 'pixelated' }} />
                 </div>
-                {/* Heart — mid-right flank (elevated well above search bar) */}
-                <div className="absolute right-[5%] top-[56%] animate-float-pixel" style={{ animationDelay: '1.5s' }}>
-                  <img src="/files/heart.svg" alt="" className="h-14 w-14 drop-shadow-[0_10px_20px_rgba(244,63,94,0.28)] transition-transform duration-300 hover:scale-110" style={{ imageRendering: 'pixelated' }} />
+                {/* Heart — lower-right flank beside table base */}
+                <div className="absolute right-1 top-[82%]">
+                  <img src="/files/heart.svg" alt="" className="h-12 w-12 drop-shadow-[0_8px_16px_rgba(244,63,94,0.25)] transition-transform duration-300 hover:scale-110" style={{ imageRendering: 'pixelated' }} />
                 </div>
               </div>
 
