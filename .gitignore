@@ -17,9 +17,13 @@ out/
 # Vercel
 .vercel
 
-# OS
+# OS & IDE
 .DS_Store
 Thumbs.db
+.agent/
+.claude/
+.gemini/
+
 
 # Logs
 *.log

@@ -106,7 +106,7 @@ class RepoRadarEngine:
                 break
         return out
 
-    def search(self, query: str, limit: int = 10, min_stars: int | None = None) -> dict:
+    def search(self, query: str, limit: int = 10, min_stars: int | None = None, language_override: str | None = None, sort_by: str = "rrf") -> dict:
         t0 = time.time()
 
         # log the query for stats/observability
@@ -128,8 +128,11 @@ class RepoRadarEngine:
         filters = parsed["filters"]
         self.query_log[-1]["source"] = parsed["source"]
         eff_stars = min_stars if min_stars is not None else (filters.get("min_stars") or 0)
-        language = filters.get("language")
-        updated_after = filters.get("updated_after")
+        language = language_override or filters.get("language")
+        if language_override:
+            filters["language"] = language_override
+        if min_stars is not None:
+            filters["min_stars"] = min_stars
 
         semantic_q = parsed["semantic"] or query
         keyword_str = " ".join(parsed["keywords"] or [semantic_q])
@@ -144,16 +147,16 @@ class RepoRadarEngine:
                     continue
                 if language and (rec.get("language") or "").lower() != language.lower():
                     continue
-                if updated_after and rec.get("pushed_at", "")[:10] < updated_after:
+                if filters.get("updated_after") and rec.get("pushed_at", "")[:10] < filters["updated_after"]:
                     continue
                 bm25_results.append({"full_name": rec["full_name"], "stars": rec.get("stars", 0),
                                      "score": round(score, 3)})
-                if len(bm25_results) >= 50:
+                if len(bm25_results) >= 100:
                     break
 
         # 3) Semantic
-        sem_results = self._semantic(semantic_q, limit=50, min_stars=eff_stars)
-        if language or updated_after:
+        sem_results = self._semantic(semantic_q, limit=100, min_stars=eff_stars)
+        if language or filters.get("updated_after"):
             filtered = []
             for s in sem_results:
                 rec = self.idx.docs_by_name.get(s["full_name"])
@@ -161,7 +164,7 @@ class RepoRadarEngine:
                     continue
                 if language and (rec.get("language") or "").lower() != language.lower():
                     continue
-                if updated_after and rec.get("pushed_at", "")[:10] < updated_after:
+                if filters.get("updated_after") and rec.get("pushed_at", "")[:10] < filters["updated_after"]:
                     continue
                 filtered.append(s)
             sem_results = filtered
@@ -180,7 +183,18 @@ class RepoRadarEngine:
         for rank, item in enumerate(sem_results):
             if item["full_name"] in fused:
                 fused[item["full_name"]]["sem"] = item["score"]
-        ranked = sorted(fused.values(), key=lambda x: -x["rrf"])[:limit]
+        
+        # Sort options: rrf (default), stars, sem, bm25
+        if sort_by == "stars":
+            ranked_list = sorted(fused.values(), key=lambda x: -x["stars"])
+        elif sort_by == "sem":
+            ranked_list = sorted(fused.values(), key=lambda x: -(x["sem"] or 0))
+        elif sort_by == "bm25":
+            ranked_list = sorted(fused.values(), key=lambda x: -(x["bm25"] or 0))
+        else:
+            ranked_list = sorted(fused.values(), key=lambda x: -x["rrf"])
+            
+        ranked = ranked_list[:limit]
 
         # 5) snippets + proof
         out = []
@@ -191,9 +205,12 @@ class RepoRadarEngine:
             out.append({
                 "full_name": r["full_name"],
                 "stars": r["stars"],
+                "forks": rec.get("forks", 0),
                 "language": rec.get("language"),
                 "description": rec.get("description", ""),
-                "topics": rec.get("topics", [])[:6],
+                "topics": rec.get("topics", [])[:8],
+                "license": (rec.get("license") or {}).get("spdx_id") if isinstance(rec.get("license"), dict) else rec.get("license"),
+                "pushed_at": rec.get("pushed_at"),
                 "bm25_score": r["bm25"],
                 "sem_score": r["sem"],
                 "rrf": round(r["rrf"], 4),
@@ -281,6 +298,34 @@ class Handler(BaseHTTPRequestHandler):
                         for l, c in langs.most_common(6)]
             self._json({"total": eng.idx.N, "popular": featured, "languages": lang_top})
             return
+
+        if parsed.path == "/api/repo":
+            qs = parse_qs(parsed.query)
+            name = qs.get("name", [""])[0]
+            if not name:
+                self._json({"error": "missing ?name="}, status=400)
+                return
+            rec = _engine.idx.docs_by_name.get(name)
+            if not rec:
+                self._json({"error": "repository not found"}, status=404)
+                return
+            lic = rec.get("license")
+            lic_name = lic.get("spdx_id") if isinstance(lic, dict) else lic
+            self._json({
+                "id": rec.get("id"),
+                "full_name": rec["full_name"],
+                "description": rec.get("description", ""),
+                "stars": rec.get("stars", 0),
+                "forks": rec.get("forks", 0),
+                "language": rec.get("language"),
+                "topics": rec.get("topics", []),
+                "license": lic_name or "Unspecified",
+                "pushed_at": rec.get("pushed_at"),
+                "readme": rec.get("readme", ""),
+                "url": f"https://github.com/{rec['full_name']}"
+            })
+            return
+
         if parsed.path == "/api/search":
             qs = parse_qs(parsed.query)
             q = qs.get("q", [""])[0]
@@ -288,8 +333,13 @@ class Handler(BaseHTTPRequestHandler):
                 self._json({"error": "missing ?q="}, status=400)
                 return
             limit = int(qs.get("limit", ["10"])[0])
+            min_stars = int(qs.get("min_stars", [0])[0]) if "min_stars" in qs and qs["min_stars"][0].isdigit() else None
+            lang = qs.get("language", [None])[0]
+            if lang == "" or lang == "all":
+                lang = None
+            sort_by = qs.get("sort", ["rrf"])[0]
             try:
-                result = _engine.search(q, limit=limit)
+                result = _engine.search(q, limit=limit, min_stars=min_stars, language_override=lang, sort_by=sort_by)
                 self._json(result)
             except Exception as e:
                 self._json({"error": f"{type(e).__name__}: {e}"}, status=500)

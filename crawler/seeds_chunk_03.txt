@@ -1,0 +1,6 @@
+medusa v2 headless ecommerce server typescript
+phidata multi agent AI assistant
+lance vector db columnar storage rust
+esp32 micropython mqtt sensor node python
+ardupilot autonomous navigation plugin
+alphafold ESMFold protein structure predictor

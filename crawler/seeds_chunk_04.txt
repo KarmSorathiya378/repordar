@@ -1,0 +1,6 @@
+pocketbase single file backend auth database
+smolagents huggingface lightweight agents
+valkey open source redis fork Go
+verilog systemverilog FPGA RISC-V CPU core
+ros2 moveit2 robotic arm motion planning
+biopython blast sequence alignment parser

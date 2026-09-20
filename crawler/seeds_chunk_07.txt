@@ -1,0 +1,6 @@
+qwik city fine-grained resumability framework
+baml structured prompt engineering language
+vespa scalable vector search engine C++
+spike RISC-V ISA simulator C++
+superglue feature matching deep learning PyTorch
+monai medical deep learning PyTorch

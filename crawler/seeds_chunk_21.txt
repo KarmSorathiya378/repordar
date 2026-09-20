@@ -1,0 +1,5 @@
+open-interpreter local code execution sandbox
+tantivy full text search engine rust
+semgrep custom static analysis rule yaml
+supercollider algorithmic audio synthesis C++
+openbb quantitative financial terminal python

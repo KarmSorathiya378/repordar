@@ -73,11 +73,14 @@ class BM25Index:
 
     def load(self, path: Path = OUT_FILE, max_repos: int | None = None) -> int:
         self.docs, self.doc_text = [], []
-        with open(path, encoding="utf-8") as f:
+        with open(path, encoding="utf-8", errors="replace") as f:
             for i, line in enumerate(f):
                 if not line.strip():
                     continue
-                rec = json.loads(line)
+                try:
+                    rec = json.loads(line)
+                except Exception:
+                    continue
                 self.docs.append(rec)
                 self.doc_text.append(self._build_text(rec))
                 if max_repos and len(self.docs) >= max_repos:

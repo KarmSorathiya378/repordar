@@ -1,0 +1,5 @@
+mem0 rag long term memory layer vector
+clickhouse analytical columnar store docker
+wazuh open source XDR security monitoring
+point cloud library PCL 3D registration C++
+zk-evm zero knowledge rollup circuit rust

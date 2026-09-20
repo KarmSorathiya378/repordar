@@ -1,0 +1,6 @@
+elysiajs bun fast web framework typescript
+pydantic-ai structured agent framework
+pgvector HNSW index optimization postgres
+tinygo microbit sensor telemetry golang
+px4 flight controller custom MAVLink plugin C++
+genomics variant calling pipeline nextflow

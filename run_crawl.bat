@@ -7,6 +7,6 @@ for /f "usebackq tokens=1,* delims==" %%a in (".env") do if "%%a"=="GITHUB_TOKEN
 set GITHUB_TOKEN=%GT%
 set PYTHONPATH=
 :pass
-D:\karm\repordar\.venv\Scripts\python.exe crawler\crawler.py --seeds-file crawler\seeds_sweep.txt --limit 200 --gate >> crawl.log 2>&1
+D:\karm\repordar\.venv\Scripts\python.exe crawler\crawler.py --seeds-file crawler\seeds_universal.txt --gate --loop >> crawl.log 2>&1
 timeout /t 30 /nobreak >nul
 goto pass

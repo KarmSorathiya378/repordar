@@ -1,0 +1,6 @@
+actix-web high performance rust backend
+instructor pydantic structured output LLM
+radare2 r2pipe binary analysis script python
+librosa audio feature extraction pitch tracker
+fix protocol client server rust trading
+mojo modular AI programming language

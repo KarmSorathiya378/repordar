@@ -1,0 +1,6 @@
+slint rust declarative GUI toolkit
+axolotl LLM fine-tuning framework PyTorch
+frida android iOS hooking dynamic analysis
+piper tts neural voice synthesis offline C++
+solidity foundry smart contract deployment template
+roc programming language compiler

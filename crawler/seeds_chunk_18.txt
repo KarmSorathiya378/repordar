@@ -1,0 +1,6 @@
+browser-use playwright stealth web agent python
+manticore search columnar fulltext engine
+bloodhound active directory attack path graph
+xtts v2 voice cloning neural model PyTorch
+ccxt crypto trading library python typescript
+odin programming language game engine

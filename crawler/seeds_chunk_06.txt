@@ -1,0 +1,6 @@
+solidjs solid-start reactive SSR starter
+agentic workflow n8n automation webhook
+chromadb local vector database python
+cocotb python hardware verification framework
+depth-anything v2 monocular depth estimation
+fhir hl7 healthcare API integration typescript

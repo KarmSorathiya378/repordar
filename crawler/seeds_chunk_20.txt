@@ -1,0 +1,5 @@
+kokoro-tts fast neural text-to-speech
+meilisearch vector hybrid search rust
+trivy container vulnerability scanner Go
+pedalboard spotify python audio processing
+freqtrade algorithmic crypto trading bot python

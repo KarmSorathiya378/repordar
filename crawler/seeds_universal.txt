@@ -1,0 +1,167 @@
+# ==============================================================================
+# REPORADAR DIVERSE PROBLEM SEED MATRIX (Phase 36 - High Dynamic Range)
+# ==============================================================================
+
+# --- Modern Web Frameworks & Edge Stack ---
+honojs edge web framework typescript
+elysiajs bun fast web framework typescript
+medusa v2 headless ecommerce server typescript
+pocketbase single file backend auth database
+surrealdb embedded graph document store rust
+solidjs solid-start reactive SSR starter
+qwik city fine-grained resumability framework
+leptos rust webassembly frontend framework
+dioxus rust cross platform GUI web
+htmx alpinejs lightweight interactive UI
+better-auth modern typescript authentication
+actix-web high performance rust backend
+axum web framework tokio rust
+litestar python ASGI web framework
+wails Go desktop application framework
+slint rust declarative GUI toolkit
+
+# --- AI Agents, RAG & LLM Infrastructure ---
+mcp server claude model context protocol
+browser-use playwright stealth web agent python
+vllm specdec speculative decoding server
+kokoro-tts fast neural text-to-speech
+open-interpreter local code execution sandbox
+mem0 rag long term memory layer vector
+graphrag neo4j knowledge graph extraction python
+dspy prompt optimizer pipeline python
+guidance constrained generation json schema
+outlines structured generation vllm local
+pydantic-ai structured agent framework
+phidata multi agent AI assistant
+smolagents huggingface lightweight agents
+agentops llm agent observability tracking
+agentic workflow n8n automation webhook
+baml structured prompt engineering language
+camel-ai multi agent role-playing framework
+agentkit coinbase crypto agent SDK
+browserbase cloud headless browser agent
+composio tools AI agent integrations
+instructor pydantic structured output LLM
+cohere command-r RAG optimization pipeline
+ollama local LLM runner REST API
+unsloth fast LLaMA fine-tuning PyTorch
+axolotl LLM fine-tuning framework PyTorch
+kserve cloud native model serving Kubernetes
+
+# --- Vector Databases & Modern Search ---
+manticore search columnar fulltext engine
+qdrant hybrid dense sparse search rust
+meilisearch vector hybrid search rust
+tantivy full text search engine rust
+clickhouse analytical columnar store docker
+duckdb parquet S3 analytical query engine
+nats jetstream event stream broker golang
+dragonfly redis fast in-memory key-value
+turso libsql sqlite edge replication SDK
+pgvector HNSW index optimization postgres
+lance vector db columnar storage rust
+valkey open source redis fork Go
+milvus vector database cloud native Go
+chromadb local vector database python
+vespa scalable vector search engine C++
+typesense fast open source search engine C++
+
+# --- DevSecOps, eBPF & Security Monitoring ---
+ebpf tracepoint kernel performance monitor C
+volatility 3 memory forensics plugin python
+libfuzzer honggfuzz coverage guided fuzzer
+radare2 r2pipe binary analysis script python
+falco runtime threat detection engine yaml
+yara rule scanner threat hunting rust
+ghidra headless script python decompiler
+frida android iOS hooking dynamic analysis
+suricata IDS alert log parser python
+bloodhound active directory attack path graph
+nuclei vulnerability scanner template yaml
+trivy container vulnerability scanner Go
+semgrep custom static analysis rule yaml
+wazuh open source XDR security monitoring
+snort 3 network intrusion detection C++
+zeek network security monitoring Bro script
+
+# --- Real-Time Systems, Embedded & Hardware ---
+zephyr rtos board driver custom C
+tinyml quantized model deployment stm32 C++
+tinygo microbit sensor telemetry golang
+esp32 micropython mqtt sensor node python
+verilog systemverilog FPGA RISC-V CPU core
+chisel3 hardware construction language scala
+cocotb python hardware verification framework
+spike RISC-V ISA simulator C++
+openvino edge AI camera object detector
+onnxruntime C++ low latency inference engine
+
+# --- Audio DSP, Music & Voice AI ---
+juce VST3 audio plugin DSP C++
+clap audio plugin format rust SDK
+librosa audio feature extraction pitch tracker
+rnnoise neural network noise suppression C
+speechbrain speaker identification PyTorch
+whisper-cpp C++ local speech recognition binding
+piper tts neural voice synthesis offline C++
+livekit WebRTC realtime audio video server Go
+xtts v2 voice cloning neural model PyTorch
+demucs audio source separation PyTorch
+pedalboard spotify python audio processing
+supercollider algorithmic audio synthesis C++
+
+# --- Spatial Computing, 3D & Computer Vision ---
+point cloud library PCL 3D registration C++
+nerf 3D gaussian splatting view synthesis PyTorch
+open3d point cloud mesh processing python
+sam2 segment anything 2 video tracking PyTorch
+yolo-nas real-time object detection ONNX
+px4 flight controller custom MAVLink plugin C++
+ardupilot autonomous navigation plugin
+ros2 moveit2 robotic arm motion planning
+isaac sim omniverse reinforcement learning robot
+depth-anything v2 monocular depth estimation
+superglue feature matching deep learning PyTorch
+openvslam visual SLAM framework C++
+colmap structure from motion SfM C++
+rerun 3D multimodal data visualization rust
+
+# --- Quantitative Finance & Web3 ---
+orderbook matching engine C++ low latency
+fix protocol client server rust trading
+backtrader zipline algorithmic trading strategy python
+solana DEX liquidity pool AMM smart contract
+options pricing black scholes greeks C++
+solidity foundry smart contract deployment template
+anchor framework solana rust smart contract
+ccxt crypto trading library python typescript
+hummingbot crypto market making bot C++
+freqtrade algorithmic crypto trading bot python
+openbb quantitative financial terminal python
+zk-evm zero knowledge rollup circuit rust
+move language aptos sui smart contract
+lean algorithmic trading platform C#
+vectorbt high performance backtesting python
+
+# --- Bioinformatics & Health Tech ---
+dicom medical image parser viewer python
+genomics variant calling pipeline nextflow
+alphafold ESMFold protein structure predictor
+biopython blast sequence alignment parser
+nifti fMRI brain image processing python
+fhir hl7 healthcare API integration typescript
+monai medical deep learning PyTorch
+pydicom dicom dataset manipulator python
+cellprofiler biological image analysis python
+scanpy single cell RNA-seq analysis python
+
+# --- Low-Level Systems Languages ---
+zig programming language build system
+mojo modular AI programming language
+rust async tokio actor framework
+go fiber fast web framework
+gleam language beam erlang web framework
+roc programming language compiler
+vlang V programming language web backend
+odin programming language game engine
+civet typescript superset parser

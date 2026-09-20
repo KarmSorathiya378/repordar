@@ -1,0 +1,6 @@
+leptos rust webassembly frontend framework
+camel-ai multi agent role-playing framework
+typesense fast open source search engine C++
+openvino edge AI camera object detector
+openvslam visual SLAM framework C++
+pydicom dicom dataset manipulator python

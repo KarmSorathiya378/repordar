@@ -1,0 +1,6 @@
+vllm specdec speculative decoding server
+qdrant hybrid dense sparse search rust
+nuclei vulnerability scanner template yaml
+demucs audio source separation PyTorch
+hummingbot crypto market making bot C++
+civet typescript superset parser

@@ -1,0 +1,6 @@
+wails Go desktop application framework
+unsloth fast LLaMA fine-tuning PyTorch
+ghidra headless script python decompiler
+whisper-cpp C++ local speech recognition binding
+options pricing black scholes greeks C++
+gleam language beam erlang web framework

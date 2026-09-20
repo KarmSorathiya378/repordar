@@ -3,37 +3,65 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ─────────────────────────────────────────────
-   RepoRadar design tokens — Stripe-inspired light
-   white canvas · deep-navy headings · weight-300
-   display type · signature purple · blue shadows
+   RepoRadar design tokens — Gamified Ultramarine & Emerald
+   Canvas: #0b0f19 · Surface: #111827 · Brand: #3b82f6
+   Accent: #10b981 · Star: #f59e0b · Border: #1e293b
    ───────────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #061b31;
+  --background: #f8fafc;
+  --foreground: #0f172a;
   --card: #ffffff;
-  --card-foreground: #061b31;
+  --card-foreground: #0f172a;
   --popover: #ffffff;
-  --popover-foreground: #061b31;
-  --primary: #533afd;
+  --popover-foreground: #0f172a;
+  --primary: #2563eb; /* Ultramarine Sapphire */
+  --primary-hover: #1d4ed8;
   --primary-foreground: #ffffff;
-  --secondary: #f6f9fc;
-  --secondary-foreground: #273951;
-  --muted: #f6f9fc;
-  --muted-foreground: #64748d;
-  --accent: #f4f4ff;
-  --accent-foreground: #4434d4;
-  --destructive: #ef4444;
+  --secondary: #eff6ff;
+  --secondary-foreground: #1e40af;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --accent: #ecfdf5; /* Emerald Glow */
+  --accent-foreground: #047857;
+  --destructive: #f43f5e;
   --destructive-foreground: #ffffff;
-  --border: #e5edf5;
-  --input: #e5edf5;
-  --ring: #533afd;
-  --radius: 0.375rem; /* Stripe: conservative 4–8px, never pill */
+  --success: #10b981;
+  --warning: #f59e0b;
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: #2563eb;
+  --radius: 0.875rem; /* 14px Card Radius */
+}
+
+.dark {
+  --background: #0b0f19; /* Obsidian Slate */
+  --foreground: #f8fafc;
+  --card: #111827; /* Deep Slate Card */
+  --card-foreground: #f8fafc;
+  --popover: #111827;
+  --popover-foreground: #f8fafc;
+  --primary: #3b82f6; /* Electric Sapphire */
+  --primary-hover: #2563eb;
+  --primary-foreground: #ffffff;
+  --secondary: #1e293b;
+  --secondary-foreground: #cbd5e1;
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
+  --accent: #064e3b;
+  --accent-foreground: #6ee7b7;
+  --destructive: #fb7185;
+  --destructive-foreground: #ffffff;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --border: #1e293b;
+  --input: #1e293b;
+  --ring: #3b82f6;
 }
 
 /* brand-colored selection */
 ::selection {
-  background: rgba(83, 58, 253, 0.14);
-  color: #061b31;
+  background: rgba(59, 130, 246, 0.25);
+  color: inherit;
 }
 
 /* smooth scrolling, sticky header offset */
@@ -81,6 +109,87 @@ html {
   }
 }
 
+/* Graph paper texture canvas background (Nexprint inspired) */
+.graph-paper-bg {
+  background-image: radial-gradient(rgba(148, 163, 184, 0.25) 1.2px, transparent 1.2px);
+  background-size: 20px 20px;
+}
+.dark .graph-paper-bg {
+  background-image: radial-gradient(rgba(51, 65, 85, 0.4) 1.2px, transparent 1.2px);
+  background-size: 20px 20px;
+}
+
+/* Floating retro pixel sticker animation */
+@keyframes float-pixel {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(3deg); }
+}
+.animate-float-pixel {
+  animation: float-pixel 3.5s ease-in-out infinite;
+}
+
+/* Gamified Chest Cards Background Gradients (Nexprint inspired) */
+.chest-starter {
+  background: linear-gradient(135deg, #ffedd5 0%, #fee2e2 100%);
+  border-color: #f97316;
+}
+.dark .chest-starter {
+  background: linear-gradient(135deg, #451a03 0%, #7c2d12 100%);
+  border-color: #ea580c;
+}
+
+.chest-bronze {
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+  border-color: #94a3b8;
+}
+.dark .chest-bronze {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  border-color: #475569;
+}
+
+.chest-silver {
+  background: linear-gradient(135deg, #fef9c3 0%, #fef08a 100%);
+  border-color: #eab308;
+}
+.dark .chest-silver {
+  background: linear-gradient(135deg, #422006 0%, #713f12 100%);
+  border-color: #ca8a04;
+}
+
+.chest-gold {
+  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+  border-color: #0284c7;
+}
+.dark .chest-gold {
+  background: linear-gradient(135deg, #0c4a6e 0%, #0369a1 100%);
+  border-color: #38bdf8;
+}
+
+.chest-diamond {
+  background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
+  border-color: #9333ea;
+}
+.dark .chest-diamond {
+  background: linear-gradient(135deg, #3b0764 0%, #581c87 100%);
+  border-color: #c084fc;
+}
+
+.chest-master {
+  background: linear-gradient(135deg, #fae8ff 0%, #f5d0fe 100%);
+  border-color: #c026d3;
+}
+.dark .chest-master {
+  background: linear-gradient(135deg, #701a75 0%, #4a044e 100%);
+  border-color: #e879f9;
+}
+
+/* Retro Pixel Grass Floor Texture */
+.pixel-grass-floor {
+  background-color: #4ade80;
+  background-image: repeating-linear-gradient(90deg, #22c55e, #22c55e 12px, #16a34a 12px, #16a34a 24px);
+  border-top: 4px solid #15803d;
+}
+
 /* Stripe-style elevation: blue-tinted multi-layer shadows */
 .shadow-card {
   box-shadow: rgba(50,50,93,0.25) 0px 30px 45px -30px,
@@ -94,13 +203,44 @@ html {
   box-shadow: rgba(23,23,23,0.08) 0px 15px 35px 0px;
 }
 
-/* snippet term highlight — brand purple, soft */
+/* custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
+}
+
+/* inputs caret color */
+input, textarea {
+  caret-color: var(--primary);
+}
+
+/* snippet term highlight — soft sapphire glow */
 mark {
-  background: #f4f4ff;
-  color: #4434d4;
-  border-radius: 3px;
-  padding: 0 2px;
+  background: rgba(59, 130, 246, 0.15);
+  color: #2563eb;
+  border-radius: 4px;
+  padding: 1px 4px;
   font-weight: 600;
+}
+.dark mark {
+  background: rgba(59, 130, 246, 0.25);
+  color: #60a5fa;
+}
+
+/* brand text highlight for key accent word */
+.brand-gradient-text {
+  color: var(--primary);
+  font-weight: 800;
 }
 
 /* ─────────────────────────────────────────────
@@ -119,7 +259,7 @@ mark {
   to { transform: rotate(360deg); }
 }
 .animate-radar-spin {
-  animation: radar-spin 3.2s linear infinite;
+  animation: radar-spin 3.6s linear infinite;
   transform-origin: center;
   transform-box: fill-box;
 }
@@ -137,7 +277,7 @@ mark {
   100% { background-position: 400px 0; }
 }
 .skeleton {
-  background: linear-gradient(90deg, #f0f4f8 25%, #e6edf4 50%, #f0f4f8 75%);
+  background: linear-gradient(90deg, var(--muted) 25%, var(--border) 50%, var(--muted) 75%);
   background-size: 800px 100%;
   animation: shimmer 1.4s infinite linear;
 }
@@ -159,45 +299,143 @@ mark {
   animation: blip-ping 2.2s ease-in-out infinite;
 }
 
-/* soft brand glow behind hero radar */
+/* subtle sapphire radial glow behind hero */
 .radar-glow {
   background:
-    radial-gradient(ellipse 60% 55% at 50% 38%, rgba(83,58,253,0.10), transparent 70%),
-    radial-gradient(ellipse 45% 40% at 30% 55%, rgba(83,58,253,0.06), transparent 70%),
-    radial-gradient(ellipse 45% 40% at 70% 55%, rgba(83,58,253,0.06), transparent 70%);
+    radial-gradient(ellipse 60% 55% at 50% 38%, rgba(59, 130, 246, 0.10), transparent 70%),
+    radial-gradient(ellipse 45% 40% at 30% 55%, rgba(16, 185, 129, 0.06), transparent 70%);
 }
 
-/* SplitText headline — brand-gradient on the word "actually" (word #5) */
-.split-headline .split-parent {
-  overflow: visible !important;
-}
-.split-headline .split-word:nth-child(5) {
-  background: linear-gradient(90deg, #533afd, #7c6cff);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-/* CTA band — subtle brand gradient panel */
+/* CTA band — subtle sapphire tint gradient */
 .cta-band {
   background:
-    radial-gradient(ellipse 70% 80% at 50% -20%, rgba(83, 58, 253, 0.16), transparent 70%),
-    radial-gradient(ellipse 40% 50% at 85% 110%, rgba(124, 108, 255, 0.10), transparent 70%),
-    linear-gradient(180deg, #fafaff, #ffffff);
+    radial-gradient(ellipse 70% 80% at 50% -20%, rgba(59, 130, 246, 0.10), transparent 70%),
+    linear-gradient(180deg, var(--card), var(--background));
 }
 
 /* card hover lift */
 .repo-card {
-  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1),
-              border-color 0.25s ease;
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.2s ease;
 }
 .repo-card:hover {
   transform: translateY(-2px);
-  border-color: #d6d9ff;
-  box-shadow: rgba(50,50,93,0.25) 0px 20px 40px -20px,
-              rgba(0,0,0,0.08) 0px 12px 24px -12px;
+  border-color: rgba(59, 130, 246, 0.35);
+  box-shadow: 0 4px 20px -2px rgba(59, 130, 246, 0.08),
+              0 2px 6px -1px rgba(11, 15, 25, 0.04);
 }
+
+/* ─────────────────────────────────────────────
+   Repository Vault Scene — 3D SVG environment animations
+   ───────────────────────────────────────────── */
+
+/* Vault idle float — subtle vertical breathing */
+@keyframes vault-float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-6px); }
+}
+.vault-idle {
+  animation: vault-float 4s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+.vault-idle:hover {
+  animation-play-state: paused;
+  transform: translateY(-4px) scale(1.015);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  filter: drop-shadow(0 20px 40px rgba(37,99,235,0.28)) !important;
+}
+
+/* Vault count pulse — brief flash when number changes */
+@keyframes vault-count-pulse-anim {
+  0%   { opacity: 1; }
+  30%  { opacity: 0.4; color: #93c5fd; text-shadow: 0 0 28px rgba(59,130,246,0.95); }
+  60%  { opacity: 1; color: #60a5fa; text-shadow: 0 0 20px rgba(59,130,246,0.7); }
+  100% { opacity: 1; }
+}
+.vault-count-pulse {
+  animation: vault-count-pulse-anim 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Vault pulse — outer glow flash on display when count changes */
+@keyframes vault-pulse-anim {
+  0%   { filter: drop-shadow(0 16px 32px rgba(37,99,235,0.18)); }
+  35%  { filter: drop-shadow(0 20px 48px rgba(59,130,246,0.55)); }
+  100% { filter: drop-shadow(0 16px 32px rgba(37,99,235,0.18)); }
+}
+.vault-pulse-active {
+  animation: vault-pulse-anim 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Scanline scroll across OLED display */
+@keyframes vault-scanline-anim {
+  0%   { transform: translateY(0px); opacity: 0.6; }
+  80%  { opacity: 0.3; }
+  100% { transform: translateY(120px); opacity: 0; }
+}
+.vault-scanline {
+  animation: vault-scanline-anim 3s linear infinite;
+  transform-box: fill-box;
+}
+
+/* LED status light pulse */
+@keyframes vault-led-anim {
+  0%, 100% { opacity: 0.8; }
+  50%       { opacity: 0.3; }
+}
+.vault-led-pulse {
+  animation: vault-led-anim 2.4s ease-in-out infinite;
+}
+
+/* Core status pulse */
+@keyframes vault-core-anim {
+  0%, 100% { r: 2; opacity: 0.8; }
+  50%       { r: 3; opacity: 0.4; }
+}
+.vault-core-pulse {
+  animation: vault-core-anim 1.8s ease-in-out infinite;
+}
+
+/* Artifact gentle drift */
+@keyframes artifact-drift {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33%       { transform: translateY(-5px) rotate(1deg); }
+  66%       { transform: translateY(-2px) rotate(-1deg); }
+}
+.artifact-float {
+  animation: artifact-drift 5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+.artifact-float:hover {
+  animation-play-state: paused;
+  transform: translateY(-4px) scale(1.08);
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Vault body — light/dark adaptive fills */
+.vault-body-fill { fill: url(#vaultShell); }
+.dark .vault-body-fill { fill: url(#vaultShellDark); }
+
+.vault-back-face { fill: #b0bec5; }
+.dark .vault-back-face { fill: #0a0f1a; }
+
+.vault-chassis-fill { fill: #64748b; }
+.dark .vault-chassis-fill { fill: #0f172a; }
+
+.vault-base-fill { fill: url(#basePlatform); }
+.dark .vault-base-fill { fill: url(#basePlatformDark); }
+
+.vault-lock-fill { fill: #334155; }
+.dark .vault-lock-fill { fill: #0f172a; }
+
+.vault-vent-fill { fill: #475569; }
+.dark .vault-vent-fill { fill: #1e293b; }
+
+/* Server module body */
+.sm-body-fill { fill: url(#smBody); }
+.dark .sm-body-fill { fill: url(#smBodyDark); }
+
+/* Shadow group — darker in dark mode */
+.vault-shadow-group { filter: url(#vaultShadow); }
+.dark .vault-shadow-group { filter: url(#vaultShadowDark); }
 
 @media (prefers-reduced-motion: reduce) {
   .animate-fade-up, .animate-radar-spin, .animate-pulse-dot, .skeleton {
@@ -205,4 +443,6 @@ mark {
     opacity: 1 !important;
   }
   .repo-card { transition: none; }
+  .vault-idle, .artifact-float, .vault-scanline,
+  .vault-led-pulse, .vault-core-pulse { animation: none !important; }
 }

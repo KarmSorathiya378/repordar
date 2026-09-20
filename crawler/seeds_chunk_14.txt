@@ -1,0 +1,6 @@
+litestar python ASGI web framework
+ollama local LLM runner REST API
+yara rule scanner threat hunting rust
+speechbrain speaker identification PyTorch
+solana DEX liquidity pool AMM smart contract
+go fiber fast web framework
