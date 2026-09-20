@@ -1168,35 +1168,35 @@ export default function App() {
             <section className="relative pt-10 pb-4 text-center sm:pt-14 overflow-visible">
               <HeroField />
 
-              {/* ── 7 Pixel Stickers scattered organically around hero like reference image ── */}
-              <div className="pointer-events-none absolute inset-0 overflow-visible hidden md:block" aria-hidden>
-                {/* 1. Meter / Battery — high-left, medium inward */}
-                <div className="absolute left-[7%] lg:left-[9%] top-[7%] -rotate-6">
+              {/* ── 7 Pixel Stickers placed in empty outer gutters (never covering content) ── */}
+              <div className="pointer-events-none absolute inset-y-0 -left-16 sm:-left-28 md:-left-40 lg:-left-56 xl:-left-72 -right-16 sm:-right-28 md:-right-36 lg:-right-48 xl:-right-60 overflow-visible hidden md:block" aria-hidden>
+                {/* 1. Meter / Battery — high outer-left gutter */}
+                <div className="absolute left-[2%] lg:left-[4%] xl:left-[6%] top-[8%] -rotate-6">
                   <img src="/files/meter.svg" alt="" className="h-14 w-14 drop-shadow-[0_8px_16px_rgba(100,116,139,0.20)]" style={{ imageRendering: 'pixelated' }} />
                 </div>
-                {/* 2. Folder — mid-left, shifted far outward into margin */}
-                <div className="absolute left-[-2.5%] sm:left-[-1%] lg:left-[0%] top-[27%] rotate-6">
+                {/* 2. Folder — mid outer-left gutter */}
+                <div className="absolute left-[-1.5%] sm:left-[0%] lg:left-[1%] xl:left-[2.5%] top-[34%] rotate-6">
                   <img src="/files/folder.svg" alt="" className="h-14 w-14 drop-shadow-[0_8px_16px_rgba(16,185,129,0.20)]" style={{ imageRendering: 'pixelated' }} />
                 </div>
-                {/* 3. Star — lower-left, tucked inward below title (like the yellow star in reference!) */}
-                <div className="absolute left-[10%] lg:left-[12%] top-[45%] -rotate-12">
+                {/* 3. Star — lower outer-left gutter */}
+                <div className="absolute left-[3%] lg:left-[5%] xl:left-[8%] top-[62%] -rotate-12">
                   <img src="/files/star.svg" alt="" className="h-14 w-14 drop-shadow-[0_8px_16px_rgba(234,179,8,0.25)]" style={{ imageRendering: 'pixelated' }} />
                 </div>
 
-                {/* 4. CMDK / Badge — high-right, medium inward */}
-                <div className="absolute right-[12%] lg:right-[15%] top-[7%] rotate-6">
+                {/* 4. CMDK / Badge — high outer-right gutter */}
+                <div className="absolute right-[3%] lg:right-[5%] xl:right-[8%] top-[10%] rotate-8">
                   <img src="/files/cmdk.svg" alt="" className="h-14 w-14 drop-shadow-[0_8px_16px_rgba(59,130,246,0.20)]" style={{ imageRendering: 'pixelated' }} />
                 </div>
-                {/* 5. Bookmark — mid-right, shifted far outward */}
-                <div className="absolute right-[-2%] sm:right-[0%] lg:right-[1.5%] top-[23%] -rotate-3">
+                {/* 5. Bookmark — mid outer-right gutter */}
+                <div className="absolute right-[-1.5%] sm:right-[0%] lg:right-[1%] xl:right-[2.5%] top-[32%] -rotate-4">
                   <img src="/files/bookmark.svg" alt="" className="h-12 w-12 drop-shadow-[0_8px_16px_rgba(244,63,94,0.20)]" style={{ imageRendering: 'pixelated' }} />
                 </div>
-                {/* 6. Bolt — mid-right, angled inward (like the tilted lightning bolt in reference!) */}
-                <div className="absolute right-[11%] lg:right-[13%] top-[31%] -rotate-[15deg]">
+                {/* 6. Bolt — lower-mid outer-right gutter */}
+                <div className="absolute right-[4%] lg:right-[7%] xl:right-[10%] top-[54%] -rotate-[15deg]">
                   <img src="/files/bolt.svg" alt="" className="h-13 w-13 drop-shadow-[0_8px_16px_rgba(59,130,246,0.25)]" style={{ imageRendering: 'pixelated' }} />
                 </div>
-                {/* 7. Heart — lower-right (like the heart in reference!) */}
-                <div className="absolute right-[6%] lg:right-[8%] top-[47%] rotate-6">
+                {/* 7. Heart — lower outer-right gutter */}
+                <div className="absolute right-[1%] lg:right-[3%] xl:right-[6%] top-[76%] rotate-6">
                   <img src="/files/heart.svg" alt="" className="h-13 w-13 drop-shadow-[0_8px_16px_rgba(244,63,94,0.25)]" style={{ imageRendering: 'pixelated' }} />
                 </div>
               </div>
